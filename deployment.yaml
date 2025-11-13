@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: 487620625686.dkr.ecr.eu-north-1.amazonaws.com/ec2-portfolio:16
+        image: 487620625686.dkr.ecr.eu-north-1.amazonaws.com/ec2-portfolio:22
         ports:
         - containerPort: 80
