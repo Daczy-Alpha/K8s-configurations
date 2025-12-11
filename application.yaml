@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: portfolio-app # Name of your application
+  namespace: argocd # Namespace where the Argo CD application resource lives
+spec:
+  project: default # The Argo CD project the application belongs to
+  source:
+    repoURL: https://github.com/Daczy-Alpha/K8s-configurations.git # URL of your Git repository
+    targetRevision: HEAD # Git revision to track (e.g., HEAD, a branch name, or a commit hash)
+    path: . # Path within the repository to your application's manifests
+  destination:
+    server: https://kubernetes.default.svc # Kubernetes API server URL
+    namespace: my-portfolio # Target namespace for deployment
+  syncPolicy:
+    automated:
+      prune: true # Automatically prune resources not defined in Git
+      selfHeal: true # Automatically sync applications to desired state if drift is detected
+    syncOptions:
+      - CreateNamespace=true # Create the target namespace if it doesn't exist
