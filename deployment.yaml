@@ -3,20 +3,30 @@ kind: Deployment
 metadata:
   name: portfolio
   namespace: my-portfolio
+
 spec:
   replicas: 3
+
   selector:
     matchLabels:
       app: portfolio
+
   template:
     metadata:
       labels:
         app: portfolio
+
     spec:
+      # Schedule pods only on nodes labeled: role=frontend
+      nodeSelector:
+        role: frontend
+
       containers:
         - name: portfolio
           image: 487620625686.dkr.ecr.eu-north-1.amazonaws.com/ec2-portfolio:25
+
           ports:
             - containerPort: 80
+
       imagePullSecrets:
         - name: ecr-secret
